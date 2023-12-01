@@ -9,6 +9,8 @@ class App extends Component{
     usersData:[],
   };
   componentDidMount() {
+    // axios make a get request to github api, then update compoment's state with 
+    // the fetched user data when the request is successfull
     axios.get("https://api.github.com/users").then((response) => {
       this.setState({ usersData: response.data });
     });
