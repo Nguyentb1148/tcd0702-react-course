@@ -3,12 +3,16 @@ import React from "react";
 export default class UserItem extends React.Component {
   render() {
     return (
-      <div>
-      {/* Displays the login name of the user */}
-      <p>{this.props.user.login}</p>
-      {/* Displays the HTML URL of the user's GitHub profile */}
-      <p>{this.props.user.html_url}</p>
-    </div>
+      <div div className="card text-center">
+         <img
+         src={this.props.user.avatar_url}
+         className="round-img"
+         alt="avatar"
+         style={{width: "60px"}}/>
+         <h3>{this.props.user.login}</h3>
+         <a className="btn btn-primary btn-sm" href={this.props.user.html_url}>
+         More </a> 
+      </div>
     );
   }
 }

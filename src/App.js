@@ -1,12 +1,13 @@
 import './App.css';
 import Navbar from './layout/Navbar';
-import Body from './layout/Body';
-
+import Users from './components/User'
 function App() {
   return (
     <div className="App">
      <Navbar/>
-     <Body/>
+     <div className="container">
+      <Users/>
+     </div>
     </div>
   );
 }
