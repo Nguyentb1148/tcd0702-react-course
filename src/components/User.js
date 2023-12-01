@@ -1,16 +1,15 @@
 import React from 'react';
 import UserItem from '../components/UserItem';
- class Users extends React.Component{
+  const Users=(props)=>{
+    const{usersData}=props;
     
-    render() {
       return (
        <div style={userStyle}>
-         {this.props.usersData.map((user)=>(
+         {usersData.map((user)=>(
           <UserItem key={user.id} user={user}/>))}
         </div>
       );
     }
-}
 
 const userStyle = {
   display: "grid",
