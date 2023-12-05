@@ -1,5 +1,5 @@
 import React from "react"
-import { useState } from 'react';
+import { useState } from "react";
 
 const Search=(props)=> {
 
@@ -9,12 +9,12 @@ const Search=(props)=> {
         e.preventDefault();//prevent the default  form submission behavior
         console.log(text);
         props.handleSearch(text);// calls the handleSearch method passed down as a prop from the parent compoment('App')
-
     }
 
-    handleChange=(e)=>{
+    const handleChange=(e)=>{
         console.log(e.target.value);
-        this.setState({text:e.target.value})// use to update the compoment state with the new input value
+        setText({text:e.target.value})
+        // use to update the compoment state with the new input value
     }
         return(
             <div>

@@ -1,34 +1,50 @@
-import './App.css';
-import { useState } from 'react';
-import Navbar from './layout/Navbar';
-import Users from './components/User';
-import Search from './components/Search';
-import axios from 'axios';
-import { Component } from 'react';
-const App=()=>{
+import axios from "axios";
+import { useState } from "react";
+import { Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import "./App.css";
+import Navbar from "./layout/Navbar";
+import About from "./pages/About";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 
-  const[usersData,setUsersData]=useState([]);
-  const[searchText,setSeachText]=useState("")
-  ;
-  // make a request to api github  to search  users name  base on provided text
-  const handleSearch=(text)=>{
-    console.log(text);
-    axios.get(`https://api.github.com/search/users?q=${text}`)
-    .then((response)=>{
-      console.log(response);
-      setState({usersData: response.data.items});
-    });
-  }
-    return (
+const App = () => {
+  const [usersData, setUsersData] = useState([]);
+  
+  const handleSearch = ({ text }) => {
+    console.log("Search query:", text);
+    axios
+      .get(`https://api.github.com/search/users?q=${text}`)
+      .then((response) => {
+        console.log("API response:", response.data.items);
+        setUsersData(response.data.items);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  };
+  
+
+  return (
+    <Router>
       <div className="App">
         <Navbar />
         <div className="container">
-         <Search handleSearch={handleSearch}/>
-         <Users usersData={usersData}/>
+          <Switch>
+            <Route exact path="/">
+              <Home usersData={usersData} handleSearch={handleSearch} />
+            </Route>
+            <Route exact path="/about">
+              <About />
+            </Route>
+            <Route path="*">
+              <NotFound />
+            </Route>
+          </Switch>
         </div>
       </div>
-    );
-  }
+    </Router>
+  );
+};
 
 export default App;
-
