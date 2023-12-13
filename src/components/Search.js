@@ -1,28 +1,30 @@
-import React from "react"
-import { useState } from "react";
+import React,{useContext,useState} from "react"
+import GithubContext from "../context/github/githubContext";
 
-const Search=(props)=> {
 
-   const[text,setText]=useState("");
+const Search=()=> {
 
+    const githubContext=useContext(GithubContext);
+
+    const {searchUsers}= githubContext;
+    const [text,setText]=useState("");
     const handleClick=(e)=>{
-        e.preventDefault();//prevent the default  form submission behavior
-        console.log(text);
-        props.handleSearch(text);// calls the handleSearch method passed down as a prop from the parent compoment('App')
+        e.preventDefault();
+        searchUsers(text);
     }
-
-    const handleChange=(e)=>{
+    const handleChange = (e) => {
         console.log(e.target.value);
-        setText({text:e.target.value})
-        // use to update the compoment state with the new input value
-    }
-        return(
-            <div>
-                <from>
-                    <input type="text" placeholder="Search" onChange={handleChange}/>
-                    <button onClick={handleClick} className="btn btn-dark btn-block">Search</button>
-                </from>
-            </div>
-        )
-    }
+        setText(e.target.value);
+      };
+      return (
+        <div>
+          <form>
+            <input type="text" placeholder="Search" onChange={handleChange} />
+            <button onClick={handleClick} className="btn btn-dark btn-block">
+              Search
+            </button>
+          </form>
+        </div>
+      );
+    };
 export default Search;

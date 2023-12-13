@@ -1,10 +1,14 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment,useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import GithubContext from"../context/github/githubContext";
 
-function User(props) {
+
+function User () {
+  const githubContext=  useContext(GithubContext);
+  const {getUser,user}=githubContext;
   const { loginId } = useParams();
   useEffect(() => {
-    props.getDetails(loginId);
+    getUser(loginId);
   }, []);
 
   const {
@@ -22,7 +26,7 @@ function User(props) {
     blog,
     webiste,
     public_gists,
-  } = props.userData;
+  } = user;
 
   return (
     <div>
